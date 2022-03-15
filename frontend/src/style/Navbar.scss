@@ -1,0 +1,82 @@
+@import "./variable/text.scss";
+@import "./variable/color.scss";
+.container {
+  height: 60px;
+  background-color: rgba(128, 128, 128, 0.064);
+}
+.Wrapper {
+  color: $color-gray;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+//Navigation
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.center {
+  flex: 1;
+  text-align: center;
+}
+.right {
+  text-align: end;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.language {
+  font-size: $font-normal;
+  cursor: pointer;
+}
+.Search {
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  padding: 4px;
+}
+.logo {
+  font-weight: $Logo-bold;
+}
+//Menu items
+.MenuItem {
+  cursor: pointer;
+  font-size: $font-normal;
+  margin-left: 25px;
+}
+//mobile
+@media only screen and (max-width: 580px) {
+  .container {
+    height: 40px;
+  }
+  .Wrapper {
+    padding: 10px 0px;
+  }
+  .language {
+    display: none;
+  }
+  .Search input {
+    width: 70px;
+    height: 10px;
+  }
+  .Search {
+    padding: 0px;
+    height: 23px;
+  }
+  .logo {
+    font-size: 22px;
+  }
+  .right {
+    flex: 2;
+    justify-content: center;
+  }
+  .MenuItem {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+}
