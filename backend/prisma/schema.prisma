@@ -9,8 +9,10 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
+//
+// User model
 model User {
+    @@map(name:"user")
   id      Int      @id @default(autoincrement())
   username String  @unique
     email String  @unique
@@ -20,6 +22,7 @@ model User {
    updatedAt DateTime @updatedAt
 }
 model Product {
+      @@map(name:"product")
   id      Int      @id @default(autoincrement())
   title String   @db.VarChar(255)
     desc String  @db.Text
@@ -32,12 +35,16 @@ model Product {
    updatedAt DateTime @updatedAt
 }
 model Categories {
+   @@map(name:"categories")
   id       Int  @id @default(autoincrement())
   NewCategories String
   Category   Product @relation(fields: [CategoryId], references: [id])
   CategoryId Int // relation scalar field  (used in the `@relation` attribute above)
 }
+//
+// Cart model
 model Cart {
+   @@map(name:"cart")
   id      Int      @id @default(autoincrement())
   userId String @unique
   CartProducts CartProducts[]
@@ -46,14 +53,17 @@ model Cart {
 }
 
 model CartProducts {
+     @@map(name:"cartproducts")
   id       Int  @id @default(autoincrement())
   productId String @unique
   quantity Int @default(1)
   CartProducts   Cart @relation(fields: [ProductsId], references: [id])
   ProductsId Int // relation scalar field  (used in the `@relation` attribute above)
 }
-
+//
+// Order model
 model Order {
+  @@map(name:"order")
   id      Int      @id @default(autoincrement())
   userId String @unique
   OrderProducts OrderProducts[]
@@ -61,6 +71,7 @@ model Order {
    updatedAt DateTime @updatedAt
 }
 model OrderProducts {
+  @@map(name:"orderproducts")
   id       Int  @id @default(autoincrement())
   productId String @unique
   quantity Int @default(1)
