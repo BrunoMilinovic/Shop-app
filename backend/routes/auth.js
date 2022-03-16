@@ -1,7 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const bcrypt = require("bcrypt");
-
+const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -17,6 +17,7 @@ routes.post("/register", async (req, res) => {
         password: hashedPassword,
       },
     });
+
     res.send({ status: "ok" }).status(200);
   } catch (err) {
     res.send({ error: `${err}` }).status(500);
@@ -41,8 +42,20 @@ routes.post("/login", async (req, res) => {
 
         //if both match than you can do anything
         if (data) {
+          const AcessToken = jwt.sign(
+            {
+              id: FindUser.id,
+              isAdmin: FindUser.isAdmin,
+            },
+            process.env.JWT,
+            {
+              expiresIn: "3d",
+            }
+          );
           const { password, ...others } = FindUser;
-          return res.status(200).json({ msg: "Login success", ...others });
+          return res
+            .status(200)
+            .json({ msg: "Login success", ...others, AcessToken });
         } else {
           return res.status(401).json({ msg: "Invalid credencial" });
         }
