@@ -38,7 +38,8 @@ model Categories {
    @@map(name:"categories")
   id       Int  @id @default(autoincrement())
   NewCategories String
-  Category   Product @relation(fields: [CategoryId], references: [id])
+  name String
+  Category   Product @relation(fields: [CategoryId], references: [id], onDelete: Cascade)
   CategoryId Int // relation scalar field  (used in the `@relation` attribute above)
 }
 //
@@ -46,7 +47,7 @@ model Categories {
 model Cart {
    @@map(name:"cart")
   id      Int      @id @default(autoincrement())
-  userId String @unique
+  userId String @unique 
   CartProducts CartProducts[]
    createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt

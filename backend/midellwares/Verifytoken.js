@@ -13,7 +13,6 @@ const verifyToken = (req, res, next) => {
       // req.user mogu koristiti di iman ovaj midelware
       // mogu pristupit id i isAdmin
       req.user = user;
-
       next();
     });
   } else {
@@ -25,7 +24,8 @@ const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
     if (
       req.user.id === req.params.id ||
-      req.user.isAdmin === ("DEVELOPER" || "ADMIN")
+      req.user.isAdmin === "DEVELOPER" ||
+      "ADMIN"
     ) {
       next();
     } else {
