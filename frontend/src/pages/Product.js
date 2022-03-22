@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Announcement from "../components/announcement";
 import Fototer from "../components/Footer";
 import Navbar from "../components/navbar";
@@ -21,7 +22,7 @@ function Product() {
           />
         </div>
         <div className="Item-info">
-          <h4 className="Item-title">Denim Jumpsuit</h4>
+          <h4 className="Item-title">Denim Jumpsuit </h4>
           <h4 className="Item-desc">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
             venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at

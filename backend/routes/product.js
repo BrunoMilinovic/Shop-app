@@ -87,6 +87,16 @@ routes.post("/categories/product", async (req, res) => {
 //GET ALL PRODUCTS
 routes.get("/find/allproducts", async (req, res) => {
   try {
+    const ProductCategory = await prisma.product.findMany({});
+    res.json(ProductCategory).status(200);
+  } catch (err) {
+    res.json(err).status(401);
+  }
+});
+
+//GET ALL PRODUCTS Category
+routes.get("/find/categoryproduct", async (req, res) => {
+  try {
     const ProductCategory = await prisma.product.findMany({
       select: {
         title: true,
